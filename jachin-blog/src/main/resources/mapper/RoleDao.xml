@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jachin.blog.dao.RoleDao">
+    <select id="listByUid" parameterType="integer" resultType="com.jachin.blog.pojo.entity.RoleEntity">
+        SELECT *
+        FROM sys_role
+        WHERE id IN (SELECT rid FROM sys_user_role WHERE uid = #{uid})
+    </select>
+</mapper>
