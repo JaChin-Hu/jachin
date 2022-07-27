@@ -1,4 +1,4 @@
-package com.jachin.blog.dao;
+package com.jachin.blog.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.jachin.blog.pojo.entity.UserEntity;
@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.Mapper;
  * @date 2022/06/30 18:05
  */
 @Mapper
-public interface UserDao extends BaseMapper<UserEntity> {
+public interface UserMapper extends BaseMapper<UserEntity> {
     /**
      * 根据用户名查找用户
      * @param username 用户名

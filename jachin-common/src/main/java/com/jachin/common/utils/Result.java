@@ -49,6 +49,14 @@ public class Result extends HashMap<String, Object> {
         return r;
     }
 
+    public static Result ok(Integer code, String msg, Object data) {
+        Result r = new Result();
+        r.put(CODE_TAG, code);
+        r.put(MSG_TAG, msg);
+        r.put(DATA_TAG, data);
+        return r;
+    }
+
     public static Result ok(Map<String, Object> map) {
         Result r = new Result();
         r.putAll(map);
@@ -72,6 +80,11 @@ public class Result extends HashMap<String, Object> {
         r.put(CODE_TAG, code);
         r.put(MSG_TAG, msg);
         return r;
+    }
+
+    public Result data(Object value) {
+        super.put(DATA_TAG, value);
+        return this;
     }
 
     @Override

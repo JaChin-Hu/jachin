@@ -1,4 +1,4 @@
-package com.jachin.blog.dao;
+package com.jachin.blog.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.jachin.blog.pojo.entity.UserRoleEntity;
@@ -12,7 +12,7 @@ import java.util.List;
  * @date 2022/06/30 18:05
  */
 @Mapper
-public interface UserRoleDao extends BaseMapper<UserRoleEntity> {
+public interface UserRoleMapper extends BaseMapper<UserRoleEntity> {
     /**
      * 通过用户 id 查找 所有 userRole
      * @param uid

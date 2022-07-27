@@ -1,5 +1,6 @@
 package com.jachin.blog.handler;
 
+import com.alibaba.fastjson2.JSON;
 import com.jachin.common.constant.ExceptionCode;
 import com.jachin.common.utils.Result;
 import org.springframework.security.access.AccessDeniedException;
@@ -23,7 +24,7 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json");
-        response.getWriter().println(Result.error(ExceptionCode.USER_PERMISSION));
+        response.getWriter().println(JSON.toJSONString(Result.error(ExceptionCode.USER_PERMISSION)));
         response.getWriter().flush();
     }
 }

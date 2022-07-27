@@ -1,6 +1,6 @@
 package com.jachin.blog.service.impl;
 
-import com.jachin.blog.dao.UserDao;
+import com.jachin.blog.mapper.UserMapper;
 import com.jachin.blog.pojo.dto.UserDetailsDto;
 import com.jachin.blog.pojo.entity.UserEntity;
 import com.jachin.blog.service.PermissionService;
@@ -15,17 +15,17 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
-    private final UserDao userDao;
+    private final UserMapper userMapper;
     private final PermissionService permissionService;
 
-    public UserDetailsServiceImpl(UserDao userDao, PermissionService permissionService) {
-        this.userDao = userDao;
+    public UserDetailsServiceImpl(UserMapper userMapper, PermissionService permissionService) {
+        this.userMapper = userMapper;
         this.permissionService = permissionService;
     }
 
     @Override
     public UserDetailsDto loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserEntity user = userDao.findOneByUsername(username);
+        UserEntity user = userMapper.findOneByUsername(username);
         if (user != null) {
             UserDetailsDto userDetailsDto = new UserDetailsDto();
             userDetailsDto.setUser(user);

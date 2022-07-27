@@ -1,10 +1,8 @@
 package com.jachin.blog.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.jachin.blog.pojo.entity.RoleEntity;
+import com.github.pagehelper.PageInfo;
 import com.jachin.blog.pojo.entity.UserEntity;
-
-import java.util.List;
 
 /**
  * @author JaChin
@@ -14,6 +12,7 @@ import java.util.List;
 public interface UserService extends IService<UserEntity> {
     /**
      * 通过用户名查找用户
+     *
      * @param username 用户名
      * @return 用户
      */
@@ -21,22 +20,18 @@ public interface UserService extends IService<UserEntity> {
 
     /**
      * 通过邮箱查找用户
+     *
      * @param email
      * @return
      */
     UserEntity findByEmail(String email);
 
     /**
-     * 通过用户名查找用户
-     * @param username 用户名
-     * @return 用户
+     * 查询用户信息
+     *
+     * @param page 页数
+     * @param size size
+     * @return PageInfo
      */
-    UserEntity loadUserByUsername(String username);
-
-    /**
-     * 根据用户id获取角色
-     * @param id id
-     * @return 角色列表
-     */
-    List<RoleEntity> getRole(Integer id);
+    PageInfo<UserEntity> list(Integer page, Integer size);
 }

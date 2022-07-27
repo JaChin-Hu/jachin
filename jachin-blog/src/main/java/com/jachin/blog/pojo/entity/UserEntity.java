@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * @author JaChin
@@ -34,9 +34,9 @@ public class UserEntity {
     @TableField(value = "is_enabled")
     private Boolean enabled;
     @TableField(fill = FieldFill.INSERT)
-    private LocalDateTime createTime;
+    private Date createTime;
     @TableField(fill = FieldFill.UPDATE)
-    private LocalDateTime updateTime;
+    private Date updateTime;
     private String createBy;
     private String updateBy;
     private String remark;

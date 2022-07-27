@@ -1,4 +1,4 @@
-package com.jachin.blog.dao;
+package com.jachin.blog.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.jachin.blog.pojo.entity.RoleMenuEntity;
@@ -12,7 +12,7 @@ import java.util.List;
  * @date 2022/06/30 18:05
  */
 @Mapper
-public interface RoleMenuDao extends BaseMapper<RoleMenuEntity> {
+public interface RoleMenuMapper extends BaseMapper<RoleMenuEntity> {
     /**
      * 根据角色 id 查询
      * @param rid 角色 id

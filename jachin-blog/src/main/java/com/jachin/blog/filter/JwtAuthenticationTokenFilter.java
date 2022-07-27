@@ -30,20 +30,6 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-//        String authHeader = request.getHeader(JwtUtils.TOKEN_HEADER);
-//        if (StringUtils.isNotBlank(authHeader) && authHeader.startsWith(JwtUtils.TOKEN_HEAD)) {
-//            String token = authHeader.substring(JwtUtils.TOKEN_HEAD.length());
-//            String username = JwtUtils.getUsernameByJwtToken(token);
-//            if (StringUtils.isNotBlank(username) && SecurityContextHolder.getContext().getAuthentication() == null) {
-//                UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
-//                // 校验token
-//                if (username.equals(userDetails.getUsername())) {
-//                    UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-//                    authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-//                    SecurityContextHolder.getContext().setAuthentication(authentication);
-//                }
-//            }
-//        }
         UserDetailsDto loginUser = tokenService.getUserDetails(request);
         if (loginUser != null && SecurityUtils.getAuthentication() == null) {
             tokenService.verifyToken(loginUser);

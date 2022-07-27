@@ -1,7 +1,7 @@
 package com.jachin.blog.service.impl;
 
-import com.jachin.blog.dao.MenuDao;
-import com.jachin.blog.dao.RoleDao;
+import com.jachin.blog.mapper.MenuMapper;
+import com.jachin.blog.mapper.RoleMapper;
 import com.jachin.blog.pojo.entity.MenuEntity;
 import com.jachin.blog.pojo.entity.RoleEntity;
 import com.jachin.blog.pojo.entity.UserEntity;
@@ -22,18 +22,18 @@ import java.util.stream.Collectors;
  */
 @Service
 public class PermissionServiceImpl implements PermissionService {
-    private final RoleDao roleDao;
-    private final MenuDao menuDao;
+    private final RoleMapper roleMapper;
+    private final MenuMapper menuMapper;
 
-    public PermissionServiceImpl(RoleDao roleDao, MenuDao menuDao) {
-        this.roleDao = roleDao;
-        this.menuDao = menuDao;
+    public PermissionServiceImpl(RoleMapper roleMapper, MenuMapper menuMapper) {
+        this.roleMapper = roleMapper;
+        this.menuMapper = menuMapper;
     }
 
     @Override
     public Set<String> getRolePermission(UserEntity userEntity) {
         Set<String> roles = new HashSet<>();
-        List<RoleEntity> roleEntities = roleDao.listByUid(userEntity.getId());
+        List<RoleEntity> roleEntities = roleMapper.listByUid(userEntity.getId());
         for (RoleEntity roleEntity : roleEntities) {
             roles.addAll(Arrays.asList(roleEntity.getRoleKey().trim().split(",")));
         }
@@ -42,11 +42,11 @@ public class PermissionServiceImpl implements PermissionService {
 
     @Override
     public Set<String> getMenuPermission(UserEntity userEntity) {
-        if (Constants.ROLE_ADMIN.equals(roleDao.selectById(userEntity.getId()).getRoleKey())) {
+        if (Constants.ROLE_ADMIN.equals(roleMapper.selectById(userEntity.getId()).getRoleKey())) {
             Set<String> strings = new HashSet<>();
             strings.add("*:*:*");
             return strings;
         }
-        return menuDao.listByUid(userEntity.getId()).stream().map(MenuEntity::getPerms).collect(Collectors.toSet());
+        return menuMapper.listByUid(userEntity.getId()).stream().map(MenuEntity::getPerms).collect(Collectors.toSet());
     }
 }

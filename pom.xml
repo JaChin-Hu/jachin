@@ -31,6 +31,11 @@
         <fastjson.version>2.0.7</fastjson.version>
         <jjwt.version>0.9.1</jjwt.version>
         <kaptcha.version>0.0.9</kaptcha.version>
+        <pagehelper.version>1.4.2</pagehelper.version>
+        <knife4j.version>3.0.3</knife4j.version>
+        <kk-anti-reptile.version>1.0.0-RELEASE</kk-anti-reptile.version>
+        <druid.version>1.2.11</druid.version>
+        <userAgentUtils.version>1.20</userAgentUtils.version>
     </properties>
 
     <dependencyManagement>
@@ -52,13 +57,18 @@
 
             <dependency>
                 <groupId>com.alibaba</groupId>
-                <artifactId>druid</artifactId>
+                <artifactId>druid-spring-boot-starter</artifactId>
                 <version>${druid.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
                 <version>${mybatis-plus-boot-starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper-spring-boot-starter</artifactId>
+                <version>${pagehelper.version}</version>
             </dependency>
 
             <dependency>
@@ -75,6 +85,21 @@
                 <groupId>com.github.axet</groupId>
                 <artifactId>kaptcha</artifactId>
                 <version>${kaptcha.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.keking.project</groupId>
+                <artifactId>kk-anti-reptile</artifactId>
+                <version>${kk-anti-reptile.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>eu.bitwalker</groupId>
+                <artifactId>UserAgentUtils</artifactId>
+                <version>${userAgentUtils.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

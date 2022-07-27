@@ -1,15 +1,4 @@
-EXPLAIN SELECT *
-FROM sys_menu m
-         LEFT JOIN sys_role_menu rm ON m.id = rm.mid
-         LEFT JOIN sys_user_role ur ON rm.rid = ur.rid
-         LEFT JOIN sys_role r ON r.id = ur.rid
-WHERE m.is_enabled = 1
-  AND r.is_enabled = 1
-  AND ur.uid = 2;
-
-EXPLAIN SELECT *
-FROM sys_menu
-WHERE id IN (SELECT mid FROM sys_role_menu WHERE rid IN (SELECT rid FROM sys_user_role WHERE uid = 2));
+SELECT 1 FROM DUAL;
 
 DROP TABLE IF EXISTS `sys_user`;
 CREATE TABLE `sys_user`
@@ -111,7 +100,7 @@ create table `sys_role_menu`
 -- ----------------------------
 -- 初始化-角色信息表数据
 -- ----------------------------
-INSERT INTO `sys_role` (`id`, `name`, `key`, `sorted`, `data_scope`, `menu_check_strictly`, `is_enabled`, `is_deleted`,
+INSERT INTO `sys_role` (`id`, `name`, `role_key`, `sorted`, `data_scope`, `menu_check_strictly`, `is_enabled`, `is_deleted`,
                         `create_time`, `create_by`, `update_time`, `update_by`, `remark`)
 VALUES (1, '超级管理员', 'admin', 0, 1, 1, 1, 0, sysdate(), 'admin', NULL, '', '超级管理员'),
        (2, '普通角色', 'common', 1, 2, 1, 1, 0, sysdate(), 'admin', NULL, '', '超级管理员');

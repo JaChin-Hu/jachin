@@ -1,5 +1,6 @@
 package com.jachin.blog.handler;
 
+import com.alibaba.fastjson2.JSON;
 import com.jachin.common.constant.ExceptionCode;
 import com.jachin.common.utils.Result;
 import org.springframework.security.core.AuthenticationException;
@@ -22,7 +23,7 @@ public class AuthenticationEntryPointImpl implements AuthenticationEntryPoint {
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json");
-        response.getWriter().println(Result.error(ExceptionCode.UNAUTHORIZED));
+        response.getWriter().println(JSON.toJSONString(Result.error(ExceptionCode.UNAUTHORIZED)));
         response.getWriter().flush();
     }
 }

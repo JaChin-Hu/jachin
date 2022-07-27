@@ -2,6 +2,7 @@ package com.jachin.blog.service.impl;
 
 import com.jachin.blog.service.RedisService;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.TimeUnit;
@@ -17,6 +18,12 @@ public class RedisServiceImpl implements RedisService {
 
     public RedisServiceImpl(RedisTemplate<String, Object> redisTemplate) {
         this.redisTemplate = redisTemplate;
+    }
+
+    @Async
+    @Override
+    public void set(String key, Object value) {
+        redisTemplate.opsForValue().set(key, value);
     }
 
     @Override

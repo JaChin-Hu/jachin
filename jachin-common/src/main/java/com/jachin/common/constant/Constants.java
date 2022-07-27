@@ -30,4 +30,7 @@ public class Constants {
     public static final String ROLE_USER = "user";
     public static final String PERMISSION_ADMIN = "*:*:*";
     public static final String DELIMITER = ",";
+
+    public static final Integer PAGE_MAX_SIZE = 50;
+    public static final String UNKNOWN = "unknown";
 }

@@ -1,7 +1,7 @@
 package com.jachin.blog.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.jachin.blog.dao.RoleMenuDao;
+import com.jachin.blog.mapper.RoleMenuMapper;
 import com.jachin.blog.pojo.entity.RoleMenuEntity;
 import com.jachin.blog.service.RoleMenuService;
 import org.springframework.stereotype.Service;
@@ -12,5 +12,5 @@ import org.springframework.stereotype.Service;
  * @date 2022/07/02 10:12
  */
 @Service
-public class RoleMenuServiceImpl extends ServiceImpl<RoleMenuDao, RoleMenuEntity> implements RoleMenuService {
+public class RoleMenuServiceImpl extends ServiceImpl<RoleMenuMapper, RoleMenuEntity> implements RoleMenuService {
 }

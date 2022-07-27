@@ -1,5 +1,6 @@
 package com.jachin.blog.service.impl;
 
+import com.alibaba.fastjson2.JSON;
 import com.jachin.blog.pojo.dto.UserDetailsDto;
 import com.jachin.blog.service.RedisService;
 import com.jachin.blog.service.TokenService;
@@ -52,7 +53,9 @@ public class TokenServiceImpl implements TokenService {
         if (StringUtils.isNotEmpty(token)) {
             try {
                 String username = getUsername(token);
-                return (UserDetailsDto) redisService.get(UserConstants.USER_DETAILS + username);
+                Object o = redisService.get(UserConstants.USER_DETAILS + username);
+                UserDetailsDto userDetailsDto = JSON.parseObject(o.toString(), UserDetailsDto.class);
+                return userDetailsDto;
             } catch (Exception e) {
                 e.printStackTrace();
             }

@@ -4,7 +4,7 @@
         "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.jachin.blog.dao.UserDao">
+<mapper namespace="com.jachin.blog.mapper.UserMapper">
 
     <select id="findOneByUsername" parameterType="string" resultType="com.jachin.blog.pojo.entity.UserEntity">
         SELECT *

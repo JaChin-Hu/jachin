@@ -1,7 +1,7 @@
-package com.jachin.blog.dao;
+package com.jachin.blog.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.jachin.blog.pojo.entity.RoleEntity;
+import com.jachin.blog.pojo.entity.MenuEntity;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -12,11 +12,11 @@ import java.util.List;
  * @date 2022/06/30 18:05
  */
 @Mapper
-public interface RoleDao extends BaseMapper<RoleEntity> {
+public interface MenuMapper extends BaseMapper<MenuEntity> {
     /**
-     * 通过用户 id 查询 roles
+     * 通过用户 id 查询 菜单
      * @param uid user id
-     * @return roles
+     * @return menus
      */
-    List<RoleEntity> listByUid(Integer uid);
+    List<MenuEntity> listByUid(Integer uid);
 }

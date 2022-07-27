@@ -1,7 +1,7 @@
 package com.jachin.blog.service.impl;
 
-import com.jachin.blog.dao.UserDao;
-import com.jachin.blog.dao.UserRoleDao;
+import com.jachin.blog.mapper.UserMapper;
+import com.jachin.blog.mapper.UserRoleMapper;
 import com.jachin.blog.pojo.entity.UserEntity;
 import com.jachin.blog.pojo.entity.UserRoleEntity;
 import com.jachin.blog.pojo.vo.UserRegisterVo;
@@ -20,14 +20,14 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 public class RegisterServiceImpl implements RegisterService {
-    private final UserDao userDao;
-    private final UserRoleDao userRoleDao;
+    private final UserMapper userMapper;
+    private final UserRoleMapper userRoleMapper;
     private final PasswordEncoder passwordEncoder;
     private final RedisService redisService;
 
-    public RegisterServiceImpl(UserDao userDao, UserRoleDao userRoleDao, PasswordEncoder passwordEncoder, RedisService redisService) {
-        this.userDao = userDao;
-        this.userRoleDao = userRoleDao;
+    public RegisterServiceImpl(UserMapper userMapper, UserRoleMapper userRoleMapper, PasswordEncoder passwordEncoder, RedisService redisService) {
+        this.userMapper = userMapper;
+        this.userRoleMapper = userRoleMapper;
         this.passwordEncoder = passwordEncoder;
         this.redisService = redisService;
     }
@@ -50,9 +50,9 @@ public class RegisterServiceImpl implements RegisterService {
             msg = "账户长度必须在2到20个字符之间";
         } else if (password.length() < UserConstants.PASSWORD_MIN_LENGTH || password.length() > UserConstants.PASSWORD_MAX_LENGTH) {
             msg = "密码长度必须在5到20个字符之间";
-        } else if (userDao.findOneByUsername(username) != null) {
+        } else if (userMapper.findOneByUsername(username) != null) {
             msg = "保存用户'" + username + "'失败，用户名已存在";
-        } else if (userDao.findOneByEmail(email) != null) {
+        } else if (userMapper.findOneByEmail(email) != null) {
             msg = "邮箱已使用";
         } else if (!StringUtils.equals(code, vo.getCode())) {
             msg = "验证码错误";
@@ -62,8 +62,8 @@ public class RegisterServiceImpl implements RegisterService {
             user.setNickname(vo.getUsername());
             user.setPassword(passwordEncoder.encode(vo.getPassword()));
             user.setEmail(vo.getEmail());
-            userDao.insert(user);
-            userRoleDao.insert(new UserRoleEntity(user.getId(), 2));
+            userMapper.insert(user);
+            userRoleMapper.insert(new UserRoleEntity(user.getId(), 2));
         }
         return msg;
     }

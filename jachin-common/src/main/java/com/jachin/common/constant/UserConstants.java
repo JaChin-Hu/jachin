@@ -75,4 +75,5 @@ public class UserConstants {
      */
     public static final int PASSWORD_MIN_LENGTH = 6;
     public static final int PASSWORD_MAX_LENGTH = 20;
+    public static final String LOGIN_INFO = "user:login:";
 }

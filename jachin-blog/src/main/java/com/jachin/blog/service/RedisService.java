@@ -9,11 +9,18 @@ import java.util.concurrent.TimeUnit;
  */
 public interface RedisService {
     /**
+     * 保存 key, value
+     * @param key key值
+     * @param value value值
+     */
+    void set(String key, Object value);
+
+    /**
      * 保存属性
      *
      * @param key   key值
      * @param value value值
-     * @param time  时间戳
+     * @param time  过期时间 TimeUnit.SECONDS
      */
     void set(String key, Object value, long time);
 
