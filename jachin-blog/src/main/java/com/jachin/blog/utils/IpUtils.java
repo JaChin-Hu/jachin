@@ -1,12 +1,15 @@
 package com.jachin.blog.utils;
 
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONObject;
+import com.jachin.common.utils.HttpUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-
-import static com.jachin.common.constant.Constants.UNKNOWN;
 
 /**
  * @author JaChin
@@ -14,6 +17,13 @@ import static com.jachin.common.constant.Constants.UNKNOWN;
  * @date 2022/07/17 14:54
  */
 public class IpUtils {
+    private static final Logger log = LoggerFactory.getLogger(IpUtils.class);
+    public static final String LOCALHOST = "127.0.0.1";
+    private static final String URL_PREFIX = "http://ip-api.com/json/";
+    private static final String URL_SUFFIX = "?lang=zh-CN";
+    public static final String UNKNOWN = "XX XX";
+
+
     public static String getIpAddress(HttpServletRequest request) {
         if (request == null) {
             return UNKNOWN;
@@ -36,7 +46,30 @@ public class IpUtils {
             ip = request.getRemoteAddr();
         }
 
-        return "0:0:0:0:0:0:0:1".equals(ip) ? "127.0.0.1" : getMultistageReverseProxyIp(ip);
+        return "0:0:0:0:0:0:0:1".equals(ip) ? LOCALHOST : getMultistageReverseProxyIp(ip);
+    }
+
+    public static String getRealAddressByIp(String ip) {
+        // 内网不查询
+        if (IpUtils.internalIp(ip)) {
+            return "内网IP";
+        }
+
+        try {
+            String rspStr = HttpUtils.sendGet(URL_PREFIX + ip + URL_SUFFIX);
+            if (StringUtils.isEmpty(rspStr)) {
+                log.error("获取地理位置异常 {}", ip);
+                return UNKNOWN;
+            }
+            JSONObject obj = JSON.parseObject(rspStr);
+            String country = obj.getString("country");
+            String regionName = obj.getString("regionName");
+            String city = obj.getString("city");
+            return String.format("%s %s %s", country, regionName, city);
+        } catch (Exception e) {
+            log.error("获取地理位置异常 {}", ip);
+        }
+        return UNKNOWN;
     }
 
     /**
@@ -47,7 +80,7 @@ public class IpUtils {
      */
     public static boolean internalIp(String ip) {
         byte[] address = textToNumericFormatV4(ip);
-        return internalIp(address) || "127.0.0.1".equals(ip);
+        return internalIp(address) || LOCALHOST.equals(ip);
     }
 
     /**
@@ -65,7 +98,7 @@ public class IpUtils {
         // 10.x.x.x/8
         final byte section1 = 0x0A;
         // 172.16.x.x/12
-        final byte section2= (byte) 0xAC;
+        final byte section2 = (byte) 0xAC;
         final byte section3 = (byte) 0x10;
         final byte section4 = (byte) 0x1F;
         // 192.168.x.x/16
@@ -170,7 +203,7 @@ public class IpUtils {
         try {
             return InetAddress.getLocalHost().getHostAddress();
         } catch (UnknownHostException e) {
-            return "127.0.0.1";
+            return LOCALHOST;
         }
     }
 
@@ -216,4 +249,6 @@ public class IpUtils {
     public static boolean isUnknown(String checkString) {
         return StringUtils.isBlank(checkString) || UNKNOWN.equals(checkString);
     }
+
+
 }

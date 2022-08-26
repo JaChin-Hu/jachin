@@ -18,5 +18,5 @@ public interface MenuMapper extends BaseMapper<MenuEntity> {
      * @param uid user id
      * @return menus
      */
-    List<MenuEntity> listByUid(Integer uid);
+    List<MenuEntity> listByUid(Long uid);
 }

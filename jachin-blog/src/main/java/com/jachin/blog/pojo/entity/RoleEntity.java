@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 @TableName("sys_role")
 public class RoleEntity {
     @TableId(type = IdType.AUTO)
-    private Integer id;
+    private Long id;
     private String name;
     private String roleKey;
     private Integer sorted;

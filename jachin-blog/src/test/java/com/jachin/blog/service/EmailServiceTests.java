@@ -1,6 +1,7 @@
 package com.jachin.blog.service;
 
-import com.jachin.common.constant.UserConstants;
+import com.jachin.common.constant.Constants;
+import com.jachin.common.constant.RedisConstants;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class EmailServiceTests {
 
     @Test
     public void getCode() {
-        redisService.set(UserConstants.CODE_PREFIX + "2061979589@qq.com", "123456", UserConstants.CODE_EXPIRE);
-        System.out.println(redisService.get(UserConstants.CODE_PREFIX + "2061979589@qq.com"));
+        redisService.set(RedisConstants.EMAIL_CODE + "2061979589@qq.com", "123456", Constants.CODE_EXPIRE);
+        System.out.println(redisService.get(RedisConstants.EMAIL_CODE + "2061979589@qq.com"));
     }
 }

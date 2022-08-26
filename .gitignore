@@ -1,5 +1,4 @@
 .idea
 **/target
 
-**/*.yml
-**/*.properties
+**/*-secret.yml

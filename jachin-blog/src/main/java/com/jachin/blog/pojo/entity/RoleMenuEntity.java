@@ -1,9 +1,7 @@
 package com.jachin.blog.pojo.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  * @author JaChin
@@ -13,6 +11,6 @@ import lombok.NoArgsConstructor;
 @Data
 @TableName("sys_role_menu")
 public class RoleMenuEntity {
-    private Integer rid;
-    private Integer mid;
+    private Long rid;
+    private Long mid;
 }

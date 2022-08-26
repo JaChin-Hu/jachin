@@ -4,11 +4,18 @@ import com.jachin.common.constant.HttpStatus;
 import com.jachin.common.utils.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.validation.BindException;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
+import javax.validation.ValidationException;
+import java.util.stream.Collectors;
 
 /**
  * @author JaChin
@@ -18,10 +25,24 @@ import javax.servlet.http.HttpServletRequest;
 @Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
     @ExceptionHandler(AccessDeniedException.class)
     public Result handleAccessDeniedException(AccessDeniedException e, HttpServletRequest request) {
         log.error("请求地址'{}', 权限校验失败'{}'", request.getRequestURI(), e.getMessage());
         return Result.error(HttpStatus.FORBIDDEN, "没有权限，请联系管理员授权");
+    }
+
+    @ExceptionHandler({BindException.class, ValidationException.class, MethodArgumentNotValidException.class})
+    public Result handleValidatedException(Exception e) {
+        log.error(e.getMessage());
+        if (e instanceof MethodArgumentNotValidException ex) {
+            return Result.error(ex.getBindingResult().getAllErrors().stream().map(ObjectError::getDefaultMessage).collect(Collectors.joining("; ")));
+        } else if (e instanceof ConstraintViolationException ex) {
+            return Result.error(ex.getConstraintViolations().stream().map(ConstraintViolation::getMessage).collect(Collectors.joining("; ")));
+        } else if (e instanceof BindException ex) {
+            return Result.error(ex.getAllErrors().stream().map(ObjectError::getDefaultMessage).collect(Collectors.joining("; ")));
+        }
+        return Result.error(e.getMessage());
     }
 
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)

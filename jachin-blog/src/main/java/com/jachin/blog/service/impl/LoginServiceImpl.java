@@ -41,17 +41,15 @@ public class LoginServiceImpl implements LoginService {
         try {
             // 该方法会去调用 UserDetailsServiceImpl.loadUserByUsername
             authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+        } catch (BadCredentialsException e) {
+            throw new ServiceException(HttpStatus.LOGIN_PASSWORD_NOT_MATCH, "用户名或密码错误");
         } catch (Exception e) {
-            if (e instanceof BadCredentialsException) {
-                throw new ServiceException(HttpStatus.LOGIN_PASSWORD_NOT_MATCH, "用户名或密码错误");
-            } else {
-                throw new ServiceException(e.getMessage());
-            }
+            throw new ServiceException(e.getMessage());
         }
         UserDetailsDto userDetailsDto = (UserDetailsDto) authentication.getPrincipal();
         String token = tokenService.createToken(userDetailsDto);
         userDetailsDto.setToken(token);
-        redisService.set(UserConstants.USER_DETAILS+userDetailsDto.getUsername(), userDetailsDto, 7, TimeUnit.DAYS);
+        redisService.set(UserConstants.USER_DETAILS + userDetailsDto.getUsername(), userDetailsDto, 7, TimeUnit.DAYS);
         return token;
     }
 }

@@ -12,6 +12,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
  * @date 2022/07/13 15:54
  */
 public class SecurityUtils {
+    private SecurityUtils() {
+    }
 
     public static Authentication getAuthentication() {
         return SecurityContextHolder.getContext().getAuthentication();

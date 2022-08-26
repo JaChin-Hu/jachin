@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 @TableName("sys_menu")
 public class MenuEntity {
     @TableId(type = IdType.AUTO)
-    private Integer id;
+    private Long id;
     private String name;
     private Integer pid;
     private Integer sorted;

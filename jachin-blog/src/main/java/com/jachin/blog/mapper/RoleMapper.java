@@ -18,5 +18,5 @@ public interface RoleMapper extends BaseMapper<RoleEntity> {
      * @param uid user id
      * @return roles
      */
-    List<RoleEntity> listByUid(Integer uid);
+    List<RoleEntity> listByUid(Long uid);
 }

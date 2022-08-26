@@ -6,12 +6,10 @@ package com.jachin.common.constant;
  * @date 2022/07/02 15:00
  */
 public class UserConstants {
-    public static final String CODE_PREFIX = "user:code:";
+    private UserConstants() {
+    }
+
     public static final String USER_DETAILS = "user:details:";
-    public static final long CODE_EXPIRE = 15 * 60;
-    public static final String EXCHANGE_DIRECT = "blog.direct";
-    public static final String QUEUE_CODE = "blog.code";
-    public static final String CODE_ROUTING_KEY = "blog.code";
 
     /**
      * 平台内系统用户的唯一标志

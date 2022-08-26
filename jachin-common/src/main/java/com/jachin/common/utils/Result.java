@@ -15,16 +15,20 @@ public class Result extends HashMap<String, Object> {
     private static final String CODE_TAG = "code";
     private static final String MSG_TAG = "msg";
     private static final String DATA_TAG = "data";
+    private static final String TIMESTAMP = "timestamp";
 
     public Result() {
+        super.put(TIMESTAMP, System.currentTimeMillis());
     }
 
     public Result(int code, String msg) {
+        super.put(TIMESTAMP, System.currentTimeMillis());
         super.put(CODE_TAG, code);
         super.put(MSG_TAG, msg);
     }
 
     public Result(int code, String msg, Object data) {
+        super.put(TIMESTAMP, System.currentTimeMillis());
         super.put(CODE_TAG, code);
         super.put(MSG_TAG, msg);
         super.put(DATA_TAG, data);

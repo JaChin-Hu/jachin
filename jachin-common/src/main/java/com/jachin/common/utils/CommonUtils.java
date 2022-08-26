@@ -8,6 +8,9 @@ import java.util.UUID;
  * @date 2022/07/02 15:01
  */
 public class CommonUtils {
+    private CommonUtils() {
+    }
+
     public static String getRandomCode() {
         UUID uuid = UUID.randomUUID();
         return uuid.toString().substring(0, 6);

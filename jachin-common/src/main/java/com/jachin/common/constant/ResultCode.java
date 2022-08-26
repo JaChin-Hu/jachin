@@ -10,11 +10,10 @@ public enum ResultCode {
      * 请求成功
      */
     SUCCESS(200, "请求成功"),
-
-    SUCCESS_login(200, "用户登录成功"),
-    SUCCESS_logout(200, "用户退出成功");
-    private Integer code;
-    private String msg;
+    LOGIN_SUCCESS(200, "用户登录成功"),
+    LOGOUT_SUCCESS(200, "用户退出成功");
+    private final Integer code;
+    private final String msg;
 
     ResultCode(Integer code, String msg) {
         this.code = code;
@@ -25,15 +24,7 @@ public enum ResultCode {
         return code;
     }
 
-    public void setCode(Integer code) {
-        this.code = code;
-    }
-
     public String getMsg() {
         return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
     }
 }

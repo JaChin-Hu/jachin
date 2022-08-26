@@ -6,6 +6,10 @@ package com.jachin.common.constant;
  * @date 2022/07/13 18:10
  */
 public class Constants {
+    private Constants() {
+    }
+
+    public static final long CODE_EXPIRE = 15 * 60L;
     public static final String UTF8 = "UTF-8";
     public static final String GBK = "GBK";
     public static final String HTTP = "http://";

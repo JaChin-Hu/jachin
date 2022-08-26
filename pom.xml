@@ -7,10 +7,11 @@
     <modules>
         <module>jachin-blog</module>
         <module>jachin-common</module>
+        <module>jachin-file</module>
     </modules>
 
     <parent>
-        <version>2.6.4</version>
+        <version>2.6.11</version>
         <artifactId>spring-boot-starter-parent</artifactId>
         <groupId>org.springframework.boot</groupId>
     </parent>
@@ -36,6 +37,8 @@
         <kk-anti-reptile.version>1.0.0-RELEASE</kk-anti-reptile.version>
         <druid.version>1.2.11</druid.version>
         <userAgentUtils.version>1.20</userAgentUtils.version>
+        <minio.version>8.4.3</minio.version>
+        <hutool.version>5.8.5</hutool.version>
     </properties>
 
     <dependencyManagement>
@@ -92,14 +95,19 @@
                 <version>${knife4j.version}</version>
             </dependency>
             <dependency>
-                <groupId>cn.keking.project</groupId>
-                <artifactId>kk-anti-reptile</artifactId>
-                <version>${kk-anti-reptile.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>eu.bitwalker</groupId>
                 <artifactId>UserAgentUtils</artifactId>
                 <version>${userAgentUtils.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.minio</groupId>
+                <artifactId>minio</artifactId>
+                <version>${minio.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

@@ -1,0 +1,17 @@
+spring:
+  servlet:
+    multipart:
+      max-file-size: -1
+
+minio:
+  # 访问的url
+  endpoint: http://192.168.33.10
+  # API的端口
+  port: 9000
+  # 秘钥
+  accessKey: jkp39bFozH0U7jzi
+  secretKey: dcgMLUWDC1mK1u0xGTMxPR9gZ3zxTR8z
+  secure: false
+  bucket-name: test # 桶名
+  image-size: 10485760 # 图片文件的最大大小
+  file-size: 1073741824 # 文件的最大大小

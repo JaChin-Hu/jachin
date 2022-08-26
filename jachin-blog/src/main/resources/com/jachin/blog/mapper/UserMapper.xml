@@ -1,19 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper
-        PUBLIC
-        "-//mybatis.org//DTD Mapper 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.jachin.blog.mapper.UserMapper">
+    <resultMap id="sys_user" type="com.jachin.blog.pojo.entity.UserEntity">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
+        <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
+        <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
+        <result column="type" jdbcType="VARCHAR" property="type"/>
+        <result column="sex" jdbcType="CHAR" property="sex"/>
+        <result column="is_enabled" jdbcType="BIT" property="enabled"/>
+        <result column="is_deleted" jdbcType="BIT" property="deleted"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="update_by" jdbcType="VARCHAR" property="updateBy"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+    </resultMap>
+
+    <sql id="findAll">
+        SELECT sys_user.id,
+               sys_user.username,
+               sys_user.password,
+               sys_user.email,
+               sys_user.mobile,
+               sys_user.nickname,
+               sys_user.avatar,
+               sys_user.type,
+               sys_user.sex,
+               sys_user.is_enabled,
+               sys_user.is_deleted,
+               sys_user.create_time,
+               sys_user.create_by,
+               sys_user.update_time,
+               sys_user.update_by,
+               sys_user.remark
+        FROM sys_user
+    </sql>
+
+    <select id="findById" parameterType="java.lang.Integer" resultMap="sys_user">
+        <include refid="findAll"/>
+        WHERE id = #{id}
+    </select>
 
     <select id="findOneByUsername" parameterType="string" resultType="com.jachin.blog.pojo.entity.UserEntity">
-        SELECT *
-        FROM sys_user
+        <include refid="findAll"/>
         WHERE username = #{username}
     </select>
     <select id="findOneByEmail" parameterType="string" resultType="com.jachin.blog.pojo.entity.UserEntity">
-        SELECT *
-        FROM sys_user
+        <include refid="findAll"/>
         WHERE email = #{email}
     </select>
 

@@ -3,11 +3,13 @@ package com.jachin.blog.controller;
 import com.jachin.blog.pojo.vo.UserRegisterVo;
 import com.jachin.blog.service.EmailService;
 import com.jachin.blog.service.RegisterService;
+import com.jachin.blog.utils.MessageUtils;
+import com.jachin.common.annotation.Anonymous;
 import com.jachin.common.utils.Result;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -25,15 +27,17 @@ public class RegisterController {
         this.emailService = emailService;
     }
 
+    @Anonymous
     @PostMapping("/sendCode")
-    public Result sendCode(@RequestParam("email") String email) {
+    public Result sendCode(String email) {
         emailService.sendCode(email);
         return Result.ok();
     }
 
+    @Anonymous
     @PostMapping("/register")
-    public Result register(@RequestBody UserRegisterVo vo) {
+    public Result register(@RequestBody @Validated UserRegisterVo vo) {
         String msg = registerService.register(vo);
-        return StringUtils.isEmpty(msg) ? Result.ok("注册成功!") : Result.error(msg);
+        return StringUtils.isEmpty(msg) ? Result.ok(MessageUtils.message("register.success")) : Result.error(msg);
     }
 }

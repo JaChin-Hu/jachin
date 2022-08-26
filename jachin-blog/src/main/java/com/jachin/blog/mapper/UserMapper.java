@@ -11,6 +11,7 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface UserMapper extends BaseMapper<UserEntity> {
+
     /**
      * 根据用户名查找用户
      * @param username 用户名
@@ -24,4 +25,11 @@ public interface UserMapper extends BaseMapper<UserEntity> {
      * @return 用户
      */
     UserEntity findOneByEmail(String email);
+
+    /**
+     * 通过用户 id 查找 用户
+     * @param id id
+     * @return 用户
+     */
+    UserEntity findById(Integer id);
 }

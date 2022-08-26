@@ -15,6 +15,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @TableName("sys_user_role")
 public class UserRoleEntity {
-    private Integer uid;
-    private Integer rid;
+    private Long uid;
+    private Long rid;
 }

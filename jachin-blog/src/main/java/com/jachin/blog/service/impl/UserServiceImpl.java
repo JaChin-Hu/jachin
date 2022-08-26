@@ -2,8 +2,8 @@ package com.jachin.blog.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.github.pagehelper.page.PageMethod;
 import com.jachin.blog.mapper.UserMapper;
 import com.jachin.blog.pojo.entity.UserEntity;
 import com.jachin.blog.service.UserService;
@@ -41,7 +41,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
         if (size > Constants.PAGE_MAX_SIZE) {
             size = Constants.PAGE_MAX_SIZE;
         }
-        PageHelper.startPage(page, size);
+        PageMethod.startPage(page, size);
         List<UserEntity> users = userMapper.selectList(null);
         return new PageInfo<>(users);
     }
